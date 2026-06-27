@@ -12,9 +12,9 @@
 
     <!-- Super App Navigation Module Options -->
     <div class="app-top-switcher-header">
-        <div class="switch-app-tab active">⚡ Shopper</div>
-        <div class="switch-app-tab">✈️ Flight Hub</div>
-        <div class="switch-app-tab">🍎 Express Cart</div>
+        <div class="switch-app-tab active" onclick="switchMainHubMode('shopper', this)">⚡ Shopper</div>
+        <div class="switch-app-tab" onclick="switchMainHubMode('flights', this)">✈️ Flight Hub</div>
+        <div class="switch-app-tab" onclick="switchMainHubMode('express', this)">🍎 Express Cart</div>
     </div>
 
     <!-- MAIN HUB MODE TOGGLE BUTTONS (BUY / SELL) -->
@@ -43,92 +43,167 @@
         </div>
         <div class="search-input-capsule location-capsule-box" style="flex: 1; display: flex; align-items: center; background: #f1f3f6; padding: 8px; border-radius: 8px;">
             <span class="search-embed-icon">🌐</span>
-            <!-- Input ko JavaScript datalist se perfect bind kar diya gaya hai -->
             <input type="text" id="location-bar" placeholder="Search by city or area..." list="global-delivery-hubs" style="border: none; background: transparent; width: 100%; margin-left: 8px; outline: none;">
             <datalist id="global-delivery-hubs"></datalist>
         </div>
     </div>
 
     <nav class="app-category-horizontal-strip">
-        <div class="category-pill-node">
+        <div class="category-pill-node" onclick="filterByBrand('iPhone')">
             <div class="category-icon-sphere">👤</div>
             <span>For You</span>
         </div>
-        <div class="category-pill-node">
+        <div class="category-pill-node" onclick="filterByBrand('motorola')">
             <div class="category-icon-sphere">👕</div>
             <span>Fashion</span>
         </div>
-        <div class="category-pill-node active-category">
+        <div class="category-pill-node active-category" onclick="renderProductShowcase(getCombinedMarketplaceInventory())">
             <div class="category-icon-sphere">📱</div>
             <span>Mobiles</span>
         </div>
-        <div class="category-pill-node">
+        <div class="category-pill-node" onclick="filterByBrand('vivo')">
             <div class="category-icon-sphere">💄</div>
             <span>Beauty</span>
         </div>
-        <div class="category-pill-node">
+        <div class="category-pill-node" onclick="filterByBrand('Samsung')">
             <div class="category-icon-sphere">💻</div>
             <span>Electronics</span>
         </div>
     </nav>
-    <main class="app-scrolling-viewport">
+    <main class="app-scrolling-viewport" id="main-content-viewport">
         
-        <section class="app-hero-carousel-banner">
-            <div class="carousel-tag-badge">BACK TO CAMPUS</div>
-            <div class="carousel-content-block">
-                <h2>Nova 2 5G</h2>
-                <p class="carousel-pricing-strike">From <span>₹10,999*</span> <del>₹14,999</del></p>
-                <p class="carousel-tagline-sub">Best Camera in the Segment</p>
-            </div>
-            <div class="carousel-indicator-dots">
-                <span class="dot-indicator"></span>
-                <span class="dot-indicator active-dot"></span>
-                <span class="dot-indicator"></span>
-            </div>
-        </section>
+        <!-- MODULE A: SHOPPER MARKETPLACE HUD -->
+        <div id="hub-view-marketplace" class="super-viewport-panel" style="display: block;">
+            <section class="app-hero-carousel-banner">
+                <div class="carousel-tag-badge">BACK TO CAMPUS</div>
+                <div class="carousel-content-block">
+                    <h2>Nova 2 5G</h2>
+                    <p class="carousel-pricing-strike">From <span>₹10,999*</span> <del>₹14,999</del></p>
+                    <p class="carousel-tagline-sub">Best Camera in the Segment</p>
+                </div>
+                <div class="carousel-indicator-dots">
+                    <span class="dot-indicator"></span>
+                    <span class="dot-indicator active-dot"></span>
+                    <span class="dot-indicator"></span>
+                </div>
+            </section>
 
-        <!-- Brand Quick Filter Strips -->
-        <section class="app-brand-filters-strip-container">
-            <div class="brand-filter-grid-flex" id="brand-logo-container" style="display: flex; gap: 15px; overflow-x: auto; padding: 10px 0;"></div>
-        </section>
+            <!-- Brand Quick Filter Strips -->
+            <section class="app-brand-filters-strip-container">
+                <div class="brand-filter-grid-flex" id="brand-logo-container" style="display: flex; gap: 15px; overflow-x: auto; padding: 10px 0;"></div>
+            </section>
 
-        <div class="app-promotional-incentive-bar">
-            <strong>💳 HDFC BANK</strong> | Up to 10% Instant Discount* on Credit/Debit Cards & EasyEMI
+            <div class="app-promotional-incentive-bar">
+                <strong>💳 HDFC BANK</strong> | Up to 10% Instant Discount* on Credit/Debit Cards & EasyEMI
+            </div>
+
+            <!-- Inventory Showcase Grid Layout -->
+            <section class="app-marketplace-inventory-section">
+                <div class="inventory-product-grid-layout" id="product-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; padding: 10px;"></div>
+            </section>
         </div>
 
-        <!-- Inventory Showcase Grid Layout (Nova phones are rendered here instantly) -->
-        <section class="app-marketplace-inventory-section">
-            <div class="inventory-product-grid-layout" id="product-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; padding: 10px;"></div>
-        </section>
+        <!-- MODULE B: EXPANDED REALISTIC NEON SNAKE GRID MODULE -->
+        <div id="hub-view-play" class="super-viewport-panel" style="display: none; padding: 20px; text-align: center;">
+            <div style="background: #1e293b; border-radius: 20px; padding: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); max-width: 410px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.1);">
+                <h3 style="margin-bottom: 5px; color: #3b82f6; font-weight: 800; font-size: 20px;">🐍 Arcade Neon Grid</h3>
+                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 15px;">Navigate using arrows below or keyboard keys</p>
+                <div style="background: #0f172a; display: inline-block; padding: 12px; border-radius: 16px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); border: 2px solid #334155;">
+                    <canvas id="arcade-snake-canvas" width="360" height="360" style="background: #090d16; display: block; border-radius: 8px;"></canvas>
+                </div>
+                <div style="margin-top: 15px; display: flex; flex-direction: column; align-items: center; gap: 6px;">
+                    <button onclick="changeSnakeDir('UP')" style="padding: 10px 24px; font-weight: bold; background: #334155; color: white; border: none; border-radius: 8px; cursor: pointer;">▲ UP</button>
+                    <div style="display: flex; gap: 15px;">
+                        <button onclick="changeSnakeDir('LEFT')" style="padding: 10px 24px; font-weight: bold; background: #334155; color: white; border: none; border-radius: 8px; cursor: pointer;">◀ LEFT</button>
+                        <button onclick="changeSnakeDir('RIGHT')" style="padding: 10px 24px; font-weight: bold; background: #334155; color: white; border: none; border-radius: 8px; cursor: pointer;">RIGHT ▶</button>
+                    </div>
+                    <button onclick="changeSnakeDir('DOWN')" style="padding: 10px 24px; font-weight: bold; background: #334155; color: white; border: none; border-radius: 8px; cursor: pointer;">▼ DOWN</button>
+                </div>
+            </div>
+        </div>
+        <!-- MODULE C: PROFILE DASHBOARD VIEW SHEET -->
+        <div id="hub-view-account" class="super-viewport-panel" style="display: none; padding: 20px;">
+            <div style="background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); max-width: 440px; margin: 0 auto;">
+                <div style="display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px;">
+                    <div style="font-size: 40px; background: #e6f0ff; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">👤</div>
+                    <div>
+                        <h3 id="profile-render-name" style="margin: 0; font-size: 18px;">Premium Shopper User</h3>
+                        <p id="profile-render-phone" style="margin: 3px 0 0 0; color: #666; font-size: 13px;">📞 Verified Mobile Account</p>
+                    </div>
+                </div>
+                <div style="background: #fafafa; padding: 15px; border-radius: 8px; font-size: 13px; color: #444; display: flex; flex-direction: column; gap: 8px;">
+                    <div>🪙 <strong>Loyalty Balance:</strong> <span class="coin-count-value">11</span> Shopper Coins</div>
+                    <div>📍 <strong>Registered Hub Address:</strong> Raigarh, Odisha Network Hub</div>
+                    <div>💳 <strong>KYC Status:</strong> Gold Level Fully Certified Profile</div>
+                </div>
+                <button onclick="alert('Session logged out clearance successful!'); localStorage.clear(); window.location.reload();" style="width: 100%; margin-top: 15px; background: #fff; border: 1px solid #ddd; color: red; padding: 11px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px;">Sign Out Account Session</button>
+            </div>
+        </div>
+
+        <!-- MODULE D: SUPER APP FLIGHTS & EXPRESS VIEWS -->
+        <div id="hub-view-flights" class="super-viewport-panel" style="display: none; padding: 20px;">
+            <div style="background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%); border-radius: 16px; padding: 20px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.15); max-width: 440px; margin: 0 auto;">
+                <h3 style="margin-bottom: 5px;">✈️ Flight Hub Radar</h3>
+                <p style="font-size: 11px; color: rgba(255,255,255,0.8); margin-bottom: 15px;">Book flights instantly with premium coin discounts</p>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <input type="text" placeholder="From (Departure City...)" style="padding: 11px; border: none; border-radius: 6px; font-size: 13px;">
+                    <input type="text" placeholder="To (Destination Terminal...)" style="padding: 11px; border: none; border-radius: 6px; font-size: 13px;">
+                    <button onclick="alert('Searching flights across active lines...')" style="background: var(--fk-yellow); color: #212121; border: none; padding: 12px; font-weight: bold; border-radius: 6px; cursor: pointer;">Analyze Flight Patterns</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="hub-view-express" class="super-viewport-panel" style="display: none; padding: 20px;">
+            <div style="background: #ffffff; border: 2px dashed #388e3c; border-radius: 16px; padding: 25px; text-align: center; max-width: 440px; margin: 0 auto;">
+                <div style="font-size: 45px; margin-bottom: 8px;">🍎</div>
+                <h3 style="color: #388e3c; margin-bottom: 5px;">Express 10-Minute Cart</h3>
+                <p style="font-size: 12px; color: #777; margin-bottom: 15px;">Hyperlocal groceries delivered at your exact location house marker marker</p>
+                <button onclick="alert('Opening Express Fresh Hub inventory...')" style="background: #388e3c; color: white; border: none; padding: 11px 22px; font-weight: bold; border-radius: 6px; cursor: pointer;">Open Localized Catalog</button>
+            </div>
+        </div>
 
     </main>
 
     <footer class="app-mobile-bottom-navigation-bar">
-        <div class="bottom-tab-node active-tab">🏠<span>Home</span></div>
-        <div class="bottom-tab-node">▶️<span>Play</span></div>
-        <div class="bottom-tab-node">🎛️<span>Categories</span></div>
-        <div class="bottom-tab-node" id="account-tab-trigger">👤<span>Account</span></div>
+        <div class="bottom-tab-node active-tab" onclick="switchFooterTab(this, 'marketplace')">🏠<span>Home</span></div>
+        <div class="bottom-tab-node" onclick="switchFooterTab(this, 'play')">▶️<span>Play</span></div>
+        <div class="bottom-tab-node" onclick="toggleCategoriesPanel()">🎛️<span>Categories</span></div>
+        <div class="bottom-tab-node" id="account-tab-trigger" onclick="switchFooterTab(this, 'account')">👤<span>Account</span></div>
         <div class="bottom-tab-node" onclick="toggleCartPanel()">
             🛒<span class="cart-floating-badge" id="cart-badge-counter">0</span><span>Cart</span>
         </div>
     </footer>
 
-    <!-- Cart Overlay Drawer Mechanics Layout -->
-    <div class="cart-sidebar-overlay-dimmer" id="cart-overlay" onclick="toggleCartPanel()" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;"></div>
-    <div class="cart-sidebar-drawer-panel" id="cart-panel" style="position: fixed; top: 0; right: -400px; width: 320px; height: 100%; background: white; z-index: 1000; transition: 0.3s; padding: 20px; box-shadow: -2px 0 5px rgba(0,0,0,0.2);">
-        <div class="cart-drawer-header-node" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
-            <h3>My Shopping Cart</h3>
-            <span class="cart-drawer-close-trigger" onclick="toggleCartPanel()" style="cursor: pointer; font-size: 20px;">✖</span>
+    <!-- Categories Dynamic Slide-out Left Drawer Panel Overlay -->
+    <div class="cart-sidebar-overlay-dimmer" id="categories-overlay" onclick="toggleCategoriesPanel()" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;"></div>
+    <div id="categories-drawer-panel" style="position: fixed; top: 0; left: -400px; width: 300px; height: 100%; background: white; z-index: 1000; transition: 0.3s; padding: 20px; box-shadow: 2px 0 5px rgba(0,0,0,0.2);">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 15px;">
+            <h3 style="font-size: 16px; font-weight: 800;">🎛️ Shop Categories</h3>
+            <span onclick="toggleCategoriesPanel()" style="cursor: pointer; font-size: 20px; font-weight: bold;">✖</span>
         </div>
-        <div class="cart-drawer-items-list-viewport" id="cart-items-box" style="height: 70%; overflow-y: auto; padding: 10px 0;"></div>
-        <div class="cart-drawer-checkout-footer" style="border-top: 1px solid #ddd; padding-top: 10px;">
-            <h3>Grand Total: ₹<span id="cart-total-val">0</span></h3>
-            <button class="cart-checkout-action-btn" onclick="triggerCheckout()" style="width: 100%; background: #2ecc71; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px;">Place Marketplace Order</button>
+        <div style="display: flex; flex-direction: column; gap: 12px; font-weight: 600; font-size: 14px;">
+            <div onclick="filterByBrand('iPhone'); toggleCategoriesPanel();" style="cursor:pointer; padding: 12px; background: #f8fafc; border-radius: 8px;">🍏 iPhone Segment</div>
+            <div onclick="filterByBrand('Samsung'); toggleCategoriesPanel();" style="cursor:pointer; padding: 12px; background: #f8fafc; border-radius: 8px;">🪐 Samsung Matrix</div>
+            <div onclick="filterByBrand('vivo'); toggleCategoriesPanel();" style="cursor:pointer; padding: 12px; background: #f8fafc; border-radius: 8px;">🔷 Vivo Showcase</div>
+            <div onclick="filterByBrand('motorola'); toggleCategoriesPanel();" style="cursor:pointer; padding: 12px; background: #f8fafc; border-radius: 8px;">🦇 Motorola Feeds</div>
         </div>
     </div>
 
-    <!-- Product View Dynamic Modal Frame Style Fixed with fallback -->
-    <div class="product-modal-dimmer" id="product-modal-view" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; align-items: center; justify-content: center;">
+    <!-- Cart Sidebar Overlay Drawer Mechanics Layout -->
+    <div class="cart-sidebar-overlay-dimmer" id="cart-overlay" onclick="toggleCartPanel()"></div>
+    <div class="cart-sidebar-drawer-panel" id="cart-panel">
+        <div class="cart-drawer-header-node">
+            <h3>My Shopping Cart</h3>
+            <span class="cart-drawer-close-trigger" onclick="toggleCartPanel()">✖</span>
+        </div>
+        <div class="cart-drawer-items-list-viewport" id="cart-items-box"></div>
+        <div class="cart-drawer-checkout-footer">
+            <h3>Grand Total: ₹<span id="cart-total-val">0</span></h3>
+            <button class="cart-checkout-action-btn" onclick="triggerCheckout()">Place Marketplace Order</button>
+        </div>
+    </div>
+    <!-- Product View Dynamic Modal Frame Style (RESTORING ALL MISSING FIELDS SAFELY) -->
+    <div class="product-modal-dimmer" id="product-modal-view">
         <div class="modal-viewport-frame" style="background: white; border-radius: 16px; width: 90%; max-width: 400px; padding: 20px; position: relative;">
             <div class="modal-header-nav" style="display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
                 <span class="back-arrow" onclick="closeProductModal()" style="cursor: pointer; font-size: 24px;">←</span>
@@ -162,14 +237,113 @@
         </div>
     </div>
 
-    <!-- Inject style class rules dynamically to handle sidebar drawer action smoothly -->
     <style>
         #cart-panel.open { right: 0px !important; }
         .brand-card-node { text-align: center; cursor: pointer; padding: 8px; border-radius: 50%; min-width: 60px; }
         .brand-card-node.active-brand { background: #e0f2fe; border: 2px solid #3b82f6; }
         .brand-img-shell { font-size: 32px; }
+        .super-viewport-panel { width: 100%; transition: opacity 0.2s ease; }
     </style>
 
+    <script>
+        function switchFooterTab(elementRef, targetViewId) {
+            document.querySelectorAll('.bottom-tab-node').forEach(node => node.classList.remove('active-tab'));
+            if(elementRef) elementRef.classList.add('active-tab');
+            document.querySelectorAll('.super-viewport-panel').forEach(panel => panel.style.display = 'none');
+
+            if(targetViewId === 'marketplace') { document.getElementById('hub-view-marketplace').style.display = 'block'; }
+            else if(targetViewId === 'play') { document.getElementById('hub-view-play').style.display = 'block'; startSnakeGame(); }
+            else if(targetViewId === 'account') { document.getElementById('hub-view-account').style.display = 'block'; }
+        }
+
+        function toggleCategoriesPanel() {
+            const panel = document.getElementById('categories-drawer-panel');
+            const overlay = document.getElementById('categories-overlay');
+            if(panel.style.left === '0px') { panel.style.left = '-400px'; overlay.style.display = 'none'; } 
+            else { panel.style.left = '0px'; overlay.style.display = 'block'; }
+        }
+
+        function switchMainHubMode(modeType, elementRef) {
+            document.querySelectorAll('.switch-app-tab').forEach(tab => tab.classList.remove('active'));
+            if(elementRef) elementRef.classList.add('active');
+            document.querySelectorAll('.super-viewport-panel').forEach(panel => panel.style.display = 'none');
+
+            if(modeType === 'shopper') { document.getElementById('hub-view-marketplace').style.display = 'block'; }
+            else if(modeType === 'flights') { document.getElementById('hub-view-flights').style.display = 'block'; }
+            else if(modeType === 'express') { document.getElementById('hub-view-express').style.display = 'block'; }
+        }
+
+        // DYNAMIC HIGH-TEXTURE SNAKE SYSTEM 
+        let snakeGridSize = 20, snakeX = 60, snakeY = 60, dx = 20, dy = 0;
+        let snakeItems = [{x: 60, y: 60}], snakeFood = {x: 180, y: 180}, arcadeTimer = null;
+
+        function startSnakeGame() {
+            const canv = document.getElementById('arcade-snake-canvas');
+            if(!canv) return;
+            const context = canv.getContext('2d');
+            snakeX = 60; snakeY = 60; dx = 20; dy = 0;
+            snakeItems = [{x: 60, y: 60}, {x: 40, y: 60}];
+            snakeFood = { x: Math.floor(Math.random() * 17) * 20, y: Math.floor(Math.random() * 17) * 20 };
+            
+            if(arcadeTimer) clearInterval(arcadeTimer);
+            arcadeTimer = setInterval(() => {
+                snakeX += dx; snakeY += dy;
+                if(snakeX < 0) snakeX = 340; if(snakeX > 340) snakeX = 0;
+                if(snakeY < 0) snakeY = 340; if(snakeY > 340) snakeY = 0;
+
+                let headNode = {x: snakeX, y: snakeY};
+                snakeItems.unshift(headNode);
+                if(snakeX === snakeFood.x && snakeY === snakeFood.y) {
+                    snakeFood = { x: Math.floor(Math.random() * 17) * 20, y: Math.floor(Math.random() * 17) * 20 };
+                } else { snakeItems.pop(); }
+
+                context.clearRect(0, 0, 360, 360);
+                // Grid matrix
+                context.strokeStyle = "rgba(51, 65, 85, 0.2)";
+                for(let l = 0; l <= 360; l += 20) {
+                    context.beginPath(); context.moveTo(l, 0); context.lineTo(l, 360); context.stroke();
+                    context.beginPath(); context.moveTo(0, l); context.lineTo(360, l); context.stroke();
+                }
+                // 3D Apple
+                context.save(); context.shadowBlur = 15; context.shadowColor = "#ef4444";
+                let foodGrad = context.createRadialGradient(snakeFood.x + 6, snakeFood.y + 6, 2, snakeFood.x + 10, snakeFood.y + 10, 10);
+                foodGrad.addColorStop(0, "#ff7675"); foodGrad.addColorStop(1, "#630202");
+                context.fillStyle = foodGrad; context.beginPath(); context.arc(snakeFood.x + 10, snakeFood.y + 10, 9, 0, 2*Math.PI); context.fill();
+                context.strokeStyle = "#2ecc71"; context.lineWidth = 2; context.beginPath(); context.moveTo(snakeFood.x + 10, snakeFood.y + 2); context.quadraticCurveTo(snakeFood.x + 14, snakeFood.y - 4, snakeFood.x + 16, snakeFood.y - 3); context.stroke();
+                context.restore();
+
+                // Shiny Snake
+                snakeItems.forEach((part, index) => {
+                    context.save(); context.shadowBlur = index === 0 ? 12 : 6; context.shadowColor = "#10b981";
+                    let snakeGrad = context.createRadialGradient(part.x + 8, part.y + 8, 2, part.x + 10, part.y + 10, 12);
+                    if(index === 0) {
+                        snakeGrad.addColorStop(0, "#34d399"); snakeGrad.addColorStop(1, "#047857");
+                        context.fillStyle = snakeGrad; context.beginPath(); context.roundRect(part.x, part.y, 19, 19, 6); context.fill();
+                        context.shadowBlur = 0; context.fillStyle = "white"; context.beginPath();
+                        context.arc(part.x + 5, part.y + 5, 2.5, 0, 2*Math.PI); context.arc(part.x + 14, part.y + 5, 2.5, 0, 2*Math.PI); context.fill();
+                    } else {
+                        snakeGrad.addColorStop(0, "#059669"); snakeGrad.addColorStop(1, "#064e3b");
+                        context.fillStyle = snakeGrad; context.beginPath(); context.roundRect(part.x + 1, part.y + 1, 17, 17, 4); context.fill();
+                    }
+                    context.restore();
+                });
+            }, 140);
+        }
+
+        function changeSnakeDir(dir) {
+            if(dir === 'UP' && dy === 0) { dx = 0; dy = -20; }
+            if(dir === 'DOWN' && dy === 0) { dx = 0; dy = 20; }
+            if(dir === 'LEFT' && dx === 0) { dx = -20; dy = 0; }
+            if(dir === 'RIGHT' && dx === 0) { dx = 20; dy = 0; }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const userName = localStorage.getItem("shopper_user_name") || localStorage.getItem("user_name");
+            const userPhone = localStorage.getItem("shopper_user_phone") || localStorage.getItem("user_phone");
+            if(userName) document.getElementById("profile-render-name").textContent = userName;
+            if(userPhone) document.getElementById("profile-render-phone").textContent = "📞 " + userPhone;
+        });
+    </script>
     <script src="nature.js"></script>
     <script src="script.js"></script>
 </body>

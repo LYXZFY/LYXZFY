@@ -41,7 +41,6 @@ if (canvas) {
                 this.reset();
             }
         }
-
         draw() {
             ctx.save();
             ctx.translate(this.x, this.y);
