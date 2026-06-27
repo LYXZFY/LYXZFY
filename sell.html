@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopper | Sell Your Items Instantly</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <canvas id="nature-canvas"></canvas>
+
+    <div class="app-top-switcher-header">
+        <div class="switch-app-tab active">⚡ Shopper</div>
+        <a href="index.html" style="color: white; text-decoration: none; margin-left: auto; font-size: 14px; font-weight: bold; align-self: center;">← Home</a>
+    </div>
+
+    <div class="sell-form-wrapper">
+        <div class="sell-form-card">
+            <h2>Post Your Item For Sale</h2>
+            <p class="sell-form-subtitle">Fill details to display your item inside Shopper user feeds</p>
+
+            <form id="shopper-sell-form" onsubmit="handlePostItem(event)">
+                <div class="form-input-node">
+                    <label>Item Title / Name *</label>
+                    <input type="text" id="sell-item-name" placeholder="e.g., iPhone 13 Pro Max, Ortho Slippers" required>
+                </div>
+
+                <div class="form-input-node">
+                    <label>Item Specifications (Optional)</label>
+                    <textarea id="sell-item-specs" placeholder="e.g., 8GB RAM, 256GB Storage, Brand New Condition, Size 8..."></textarea>
+                </div>
+
+                <div class="form-input-node">
+                    <label>Your City / Area Location (All India Auto-Search) *</label>
+                    <!-- JavaScript auto-load hubs datalist configuration matrix links inside here -->
+                    <input type="text" id="sell-item-location" placeholder="Type city, state, or neighborhood..." list="india-atlas-hubs" required>
+                    <datalist id="india-atlas-hubs"></datalist>
+                </div>
+                <div class="form-input-node">
+                    <label>Upload Item Image *</label>
+                    <div class="file-upload-dropzone">
+                        <input type="file" id="sell-item-image" accept="image/*" onchange="previewUploadedImage(event)" required>
+                        <div id="upload-placeholder-text">📁 Click to choose item image file</div>
+                        <img id="upload-preview-render" src="" alt="Preview">
+                    </div>
+                </div>
+
+                <div class="form-input-node">
+                    <label>Contact Phone Number (For Buyers to Call) *</label>
+                    <input type="tel" id="sell-item-phone" placeholder="Enter your 10-digit mobile number" pattern="[0-9]{10}" required>
+                </div>
+
+                <div class="form-input-node">
+                    <label>Set Sell Price (₹) *</label>
+                    <input type="number" id="sell-item-price" placeholder="Enter target pricing in Rupees" required>
+                </div>
+
+                <button type="submit" class="submit-post-btn">🚀 Publish Listing on Shopper</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Injecting Auto-Search Locations and LocalStorage Save Mechanism -->
+    <script>
+        const indianAtlasHubs = [
+            "Bhubaneswar, Odisha", "Cuttack, Odisha", "Puri, Odisha", "Rourkela, Odisha", "Sambalpur, Odisha",
+            "Mumbai, Maharashtra", "Pune, Maharashtra", "Nagpur, Maharashtra", "Thane, Maharashtra",
+            "New Delhi, Delhi", "Noida, Uttar Pradesh", "Ghaziabad, Uttar Pradesh", "Lucknow, Uttar Pradesh", "Patna, Bihar",
+            "Kolkata, West Bengal", "Howrah, West Bengal", "Siliguri, West Bengal",
+            "Bangalore, Karnataka", "Mysore, Karnataka", "Hyderabad, Telangana", "Chennai, Tamil Nadu",
+            "Ahmedabad, Gujarat", "Surat, Gujarat", "Jaipur, Rajasthan", "Udaipur, Rajasthan", "Indore, Madhya Pradesh"
+        ];
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const listRef = document.getElementById("india-atlas-hubs");
+            if(listRef) {
+                listRef.innerHTML = "";
+                indianAtlasHubs.forEach(city => {
+                    let opt = document.createElement("option");
+                    opt.value = city;
+                    listRef.appendChild(opt);
+                });
+            }
+        });
+
+        // Dynamic base64 layout renderer handler to preview uploaded items images smoothly
+        let globalImgBase64 = "";
+        window.previewUploadedImage = function(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const preview = document.getElementById("upload-preview-render");
+                const text = document.getElementById("upload-placeholder-text");
+                if (preview) {
+                    preview.src = reader.result;
+                    preview.style.display = "block";
+                    if (text) text.style.display = "none";
+                }
+                globalImgBase64 = reader.result;
+            }
+            if(event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        };
+
+        // Master compiler pipeline publishing items live on your system index website feed
+        window.handlePostItem = function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById("sell-item-name").value;
+            const specs = document.getElementById("sell-item-specs").value;
+            const location = document.getElementById("sell-item-location").value;
+            const phone = document.getElementById("sell-item-phone").value;
+            const price = parseInt(document.getElementById("sell-item-price").value);
+
+            let currentItems = JSON.parse(localStorage.getItem("shopper_posted_items")) || [];
+            
+            let newItemData = {
+                id: Date.now(),
+                name: name,
+                price: price,
+                brand: "AI+", 
+                location: location,
+                phone: phone,
+                specs: specs,
+                image: globalImgBase64 || null,
+                icon: "📱"
+            };
+
+            currentItems.unshift(newItemData);
+            localStorage.setItem("shopper_posted_items", JSON.stringify(currentItems));
+
+            alert("Listing Published Successfully! Redirecting to Marketplace feed...");
+            window.location.href = "index.html";
+        };
+    </script>
+
+    <script src="nature.js"></script>
+    <script src="sell.js"></script>
+</body>
+</html>

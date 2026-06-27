@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopper | Account Gateway Login</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+    <!-- Controlled Falling Leaves & Flowers Background Layers -->
+    <canvas id="nature-canvas"></canvas>
+    
+    <div class="auth-full-page-frame">
+        <div class="auth-card-panel">
+            <h2 class="auth-brand">Shopper</h2>
+            <p class="auth-subtitle">Login to access your premium global dashboard</p>
+            
+            <form id="login-form-engine">
+                <div class="input-form-field">
+                    <label>Username or Email Address</label>
+                    <input type="text" id="login-id" placeholder="Enter registered credentials" required>
+                </div>
+                <div class="input-form-field">
+                    <label>Account Password</label>
+                    <input type="password" id="login-pass" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="auth-action-btn">Sign In</button>
+            </form>
+            
+            <div class="auth-navigation-footer">
+                <a href="forgot.html" class="nav-link-left">Forgot Password?</a>
+                <a href="register.html" class="nav-link-right">New User? Register</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="nature.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

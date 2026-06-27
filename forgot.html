@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopper | Credential Recovery Terminal</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+    <canvas id="nature-canvas"></canvas>
+    
+    <!-- Real Mobile Notification Simulation Banner Layer -->
+    <div class="simulated-sms-banner" id="sms-notification-alert">
+        <div class="sms-icon-block">💬</div>
+        <div class="sms-body-text">
+            <strong>SHOPPER SECURE SMS NODE</strong>
+            <p id="sms-message-content">Verification OTP token dispatched successfully.</p>
+        </div>
+    </div>
+    
+    <div class="auth-full-page-frame">
+        
+        <!-- STEP 1: VERIFY TARGET PROFILE ENTRY -->
+        <div class="auth-card-panel active-panel" id="forgot-step-card">
+            <h2 class="auth-brand">Shopper</h2>
+            <p class="auth-subtitle">Recover your security access key credentials</p>
+            <form id="forgot-form-engine">
+                <div class="input-form-field">
+                    <label>Registered Email or Phone Number</label>
+                    <input type="text" id="forgot-email-phone" placeholder="Enter registered credentials" required>
+                </div>
+                <button type="submit" class="auth-action-btn">Request Verification OTP</button>
+            </form>
+            <div class="auth-navigation-footer">
+                <a href="login.html" class="nav-link-left">← Back to Login</a>
+            </div>
+        </div>
+
+        <!-- STEP 2: SECURE OTP TOKEN CHALLENGE ENTRY -->
+        <div class="auth-card-panel" id="otp-step-card">
+            <h2 class="auth-brand">Shopper</h2>
+            <p class="auth-subtitle">Enter secure 4-digit token authentication code</p>
+            <form id="otp-form-engine">
+                <div class="input-form-field">
+                    <label>One-Time Token Verification</label>
+                    <input type="text" id="otp-input" placeholder="0 0 0 0" maxlength="4" style="text-align: center; letter-spacing: 12px; font-size: 20px; font-weight: bold;" required>
+                </div>
+                <button type="submit" class="auth-action-btn">Verify Account Token</button>
+            </form>
+        </div>
+
+        <!-- STEP 3: RESET CIPHER PARAMETERS TIERS -->
+        <div class="auth-card-panel" id="reset-step-card">
+            <h2 class="auth-brand">Shopper</h2>
+            <p class="auth-subtitle">Configure a strong new cryptographic security key</p>
+            <form id="reset-form-engine">
+                <div class="input-form-field">
+                    <label>New Account Password</label>
+                    <input type="password" id="new-pass" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="auth-action-btn">Apply Password Update</button>
+            </form>
+            <button class="skip-action-link" id="skip-reset-trigger">Skip & Proceed to Marketplace</button>
+        </div>
+
+    </div>
+
+    <script src="nature.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

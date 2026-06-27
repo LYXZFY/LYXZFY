@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopper | Account Initialization Registry</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+    <canvas id="nature-canvas"></canvas>
+    
+    <div class="auth-full-page-frame">
+        <div class="auth-card-panel">
+            <h2 class="auth-brand">Shopper</h2>
+            <p class="auth-subtitle">Initialize your worldwide consumer portal node</p>
+            
+            <form id="register-form-engine">
+                <div class="input-form-field">
+                    <label>Username</label>
+                    <input type="text" id="reg-user" placeholder="Choose unique username" required>
+                </div>
+                <div class="input-form-field">
+                    <label>Email Address</label>
+                    <input type="email" id="reg-email" placeholder="name@domain.com" required>
+                </div>
+                <div class="input-form-field">
+                    <label>Mobile Number</label>
+                    <input type="tel" id="reg-phone" placeholder="Enter 10-digit mobile number" pattern="[0-9]{10}" required>
+                </div>
+                <div class="input-form-field">
+                    <label>Create Account Password</label>
+                    <input type="password" id="reg-pass" placeholder="Min 8 letters, 1 Capital, 1 Number" required>
+                </div>
+                <div class="input-form-field">
+                    <label>Repeat Account Password</label>
+                    <input type="password" id="reg-repass" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="auth-action-btn">Generate Security Token</button>
+            </form>
+            
+            <div class="auth-navigation-footer" style="justify-content: center;">
+                <a href="login.html" class="nav-link-right">Already Registered? Log In</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="nature.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>
