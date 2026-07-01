@@ -10,11 +10,9 @@
 
     <canvas id="nature-canvas"></canvas>
 
-    <!-- Super App Navigation Module Options -->
+    <!-- Super App Navigation Module Options (Flights & Express Removed Completely) -->
     <div class="app-top-switcher-header">
-        <div class="switch-app-tab active" onclick="switchMainHubMode('shopper', this)">⚡ Shopper</div>
-        <div class="switch-app-tab" onclick="switchMainHubMode('flights', this)">✈️ Flight Hub</div>
-        <div class="switch-app-tab" onclick="switchMainHubMode('express', this)">🍎 Express Cart</div>
+        <div class="switch-app-tab active">⚡ Shopper Portal Hub</div>
     </div>
 
     <!-- MAIN HUB MODE TOGGLE BUTTONS (BUY / SELL) -->
@@ -47,7 +45,6 @@
             <datalist id="global-delivery-hubs"></datalist>
         </div>
     </div>
-
     <nav class="app-category-horizontal-strip">
         <div class="category-pill-node" onclick="filterByBrand('iPhone')">
             <div class="category-icon-sphere">👤</div>
@@ -70,6 +67,7 @@
             <span>Electronics</span>
         </div>
     </nav>
+
     <main class="app-scrolling-viewport" id="main-content-viewport">
         
         <!-- MODULE A: SHOPPER MARKETPLACE HUD -->
@@ -102,17 +100,68 @@
                 <div class="inventory-product-grid-layout" id="product-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; padding: 10px;"></div>
             </section>
         </div>
+        <!-- MODULE B: GAMES CONSOLE HUB SELECTION GRID -->
+        <div id="hub-view-play" class="super-viewport-panel" style="display: none; padding: 15px;">
+            
+            <!-- Games Grid Listing Container Dashboard View -->
+            <div id="arcade-apps-dashboard" style="display: block;">
+                <h3 style="margin: 5px 0 15px 5px; font-weight: 800; font-size: 20px; color: #1e293b;">🎮 Shopper Arcade Station</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px;">
+                    <!-- Game 1 -->
+                    <div onclick="initiateArcadeGame('snake')" style="background: linear-gradient(135deg, #10b981, #047857); padding: 16px; border-radius: 14px; color: white; cursor: pointer; text-align: center; box-shadow: 0 4px 10px rgba(16,185,129,0.2);">
+                        <div style="font-size: 34px; margin-bottom: 5px;">🐍</div>
+                        <h4 style="margin:0; font-size:14px; font-weight:700;">Neon Snake</h4>
+                        <span style="font-size:10px; opacity:0.8;">Realistic 3D Grid</span>
+                    </div>
+                    <!-- Game 2 -->
+                    <div onclick="initiateArcadeGame('bird')" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); padding: 16px; border-radius: 14px; color: white; cursor: pointer; text-align: center; box-shadow: 0 4px 10px rgba(59,130,246,0.2);">
+                        <div style="font-size: 34px; margin-bottom: 5px;">🐤</div>
+                        <h4 style="margin:0; font-size:14px; font-weight:700;">Flappy Bird</h4>
+                        <span style="font-size:10px; opacity:0.8;">Tap to Flap Engine</span>
+                    </div>
+                    <!-- Game 3 -->
+                    <div onclick="initiateArcadeGame('bricks')" style="background: linear-gradient(135deg, #f59e0b, #b45309); padding: 16px; border-radius: 14px; color: white; cursor: pointer; text-align: center; box-shadow: 0 4px 10px rgba(245,158,11,0.2);">
+                        <div style="font-size: 34px; margin-bottom: 5px;">🧱</div>
+                        <h4 style="margin:0; font-size:14px; font-weight:700;">Brick Breaker</h4>
+                        <span style="font-size:10px; opacity:0.8;">Smash Block Waves</span>
+                    </div>
+                    <!-- Game 4 -->
+                    <div onclick="initiateArcadeGame('ttt')" style="background: linear-gradient(135deg, #ec4899, #be185d); padding: 16px; border-radius: 14px; color: white; cursor: pointer; text-align: center; box-shadow: 0 4px 10px rgba(236,72,153,0.2);">
+                        <div style="font-size: 34px; margin-bottom: 5px;">❌</div>
+                        <h4 style="margin:0; font-size:14px; font-weight:700;">Tic-Tac-Toe</h4>
+                        <span style="font-size:10px; opacity:0.8;">Vs Smart AI Bot</span>
+                    </div>
+                    <!-- Game 5 -->
+                    <div onclick="initiateArcadeGame('racer')" style="background: linear-gradient(135deg, #ef4444, #b91c1c); padding: 16px; border-radius: 14px; color: white; cursor: pointer; text-align: center; box-shadow: 0 4px 10px rgba(239,68,68,0.2);">
+                        <div style="font-size: 34px; margin-bottom: 5px;">🏎️</div>
+                        <h4 style="margin:0; font-size:14px; font-weight:700;">Highway Racer</h4>
+                        <span style="font-size:10px; opacity:0.8;">Dodge Speed Traffic</span>
+                    </div>
+                    <!-- Game 6 -->
+                    <div onclick="initiateArcadeGame('target')" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9); padding: 16px; border-radius: 14px; color: white; cursor: pointer; text-align: center; box-shadow: 0 4px 10px rgba(139,92,246,0.2);">
+                        <div style="font-size: 34px; margin-bottom: 5px;">🎯</div>
+                        <h4 style="margin:0; font-size:14px; font-weight:700;">Target Rush</h4>
+                        <span style="font-size:10px; opacity:0.8;">Tap Reaction Test</span>
+                    </div>
+                </div>
+            </div>
 
-        <!-- MODULE B: EXPANDED REALISTIC NEON SNAKE GRID MODULE -->
-        <div id="hub-view-play" class="super-viewport-panel" style="display: none; padding: 20px; text-align: center;">
-            <div style="background: #1e293b; border-radius: 20px; padding: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); max-width: 410px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.1);">
-                <h3 style="margin-bottom: 5px; color: #3b82f6; font-weight: 800; font-size: 20px;">🐍 Arcade Neon Grid</h3>
-                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 15px;">Navigate using arrows below or keyboard keys</p>
+            <!-- Active Large Dedicated Game Canvas Arena Room -->
+            <div id="arcade-game-play-arena" style="display: none; background: #1e293b; border-radius: 20px; padding: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); max-width: 410px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.1);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <button onclick="terminateGameSession()" style="background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px;">⬅ Close Game</button>
+                    <h4 id="active-game-title-header" style="color: white; margin:0; font-size:15px; font-weight:800;">Game Screen</h4>
+                    <div style="color: #67e8f9; font-weight: bold; font-size: 14px;">Score: <span id="game-universal-score">0</span></div>
+                </div>
+
                 <div style="background: #0f172a; display: inline-block; padding: 12px; border-radius: 16px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); border: 2px solid #334155;">
                     <canvas id="arcade-snake-canvas" width="360" height="360" style="background: #090d16; display: block; border-radius: 8px;"></canvas>
                 </div>
+
+                <!-- Universal Controls for touch mapping inputs -->
                 <div style="margin-top: 15px; display: flex; flex-direction: column; align-items: center; gap: 6px;">
-                    <button onclick="changeSnakeDir('UP')" style="padding: 10px 24px; font-weight: bold; background: #334155; color: white; border: none; border-radius: 8px; cursor: pointer;">▲ UP</button>
+                    <button onclick="changeSnakeDir('UP')" style="padding: 10px 24px; font-weight: bold; background: #334155; color: white; border: none; border-radius: 8px; cursor: pointer;">▲ UP / FLAP</button>
                     <div style="display: flex; gap: 15px;">
                         <button onclick="changeSnakeDir('LEFT')" style="padding: 10px 24px; font-weight: bold; background: #334155; color: white; border: none; border-radius: 8px; cursor: pointer;">◀ LEFT</button>
                         <button onclick="changeSnakeDir('RIGHT')" style="padding: 10px 24px; font-weight: bold; background: #334155; color: white; border: none; border-radius: 8px; cursor: pointer;">RIGHT ▶</button>
@@ -137,28 +186,6 @@
                     <div>💳 <strong>KYC Status:</strong> Gold Level Fully Certified Profile</div>
                 </div>
                 <button onclick="alert('Session logged out clearance successful!'); localStorage.clear(); window.location.reload();" style="width: 100%; margin-top: 15px; background: #fff; border: 1px solid #ddd; color: red; padding: 11px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px;">Sign Out Account Session</button>
-            </div>
-        </div>
-
-        <!-- MODULE D: SUPER APP FLIGHTS & EXPRESS VIEWS -->
-        <div id="hub-view-flights" class="super-viewport-panel" style="display: none; padding: 20px;">
-            <div style="background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%); border-radius: 16px; padding: 20px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.15); max-width: 440px; margin: 0 auto;">
-                <h3 style="margin-bottom: 5px;">✈️ Flight Hub Radar</h3>
-                <p style="font-size: 11px; color: rgba(255,255,255,0.8); margin-bottom: 15px;">Book flights instantly with premium coin discounts</p>
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <input type="text" placeholder="From (Departure City...)" style="padding: 11px; border: none; border-radius: 6px; font-size: 13px;">
-                    <input type="text" placeholder="To (Destination Terminal...)" style="padding: 11px; border: none; border-radius: 6px; font-size: 13px;">
-                    <button onclick="alert('Searching flights across active lines...')" style="background: var(--fk-yellow); color: #212121; border: none; padding: 12px; font-weight: bold; border-radius: 6px; cursor: pointer;">Analyze Flight Patterns</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="hub-view-express" class="super-viewport-panel" style="display: none; padding: 20px;">
-            <div style="background: #ffffff; border: 2px dashed #388e3c; border-radius: 16px; padding: 25px; text-align: center; max-width: 440px; margin: 0 auto;">
-                <div style="font-size: 45px; margin-bottom: 8px;">🍎</div>
-                <h3 style="color: #388e3c; margin-bottom: 5px;">Express 10-Minute Cart</h3>
-                <p style="font-size: 12px; color: #777; margin-bottom: 15px;">Hyperlocal groceries delivered at your exact location house marker marker</p>
-                <button onclick="alert('Opening Express Fresh Hub inventory...')" style="background: #388e3c; color: white; border: none; padding: 11px 22px; font-weight: bold; border-radius: 6px; cursor: pointer;">Open Localized Catalog</button>
             </div>
         </div>
 
@@ -202,7 +229,7 @@
             <button class="cart-checkout-action-btn" onclick="triggerCheckout()">Place Marketplace Order</button>
         </div>
     </div>
-    <!-- Product View Dynamic Modal Frame Style (RESTORING ALL MISSING FIELDS SAFELY) -->
+    <!-- Product View Dynamic Modal Frame Style -->
     <div class="product-modal-dimmer" id="product-modal-view">
         <div class="modal-viewport-frame" style="background: white; border-radius: 16px; width: 90%; max-width: 400px; padding: 20px; position: relative;">
             <div class="modal-header-nav" style="display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
@@ -229,7 +256,6 @@
                     <p id="modal-item-specs" style="margin: 0; font-size: 13px; color: #555;">RAM/Storage specifications container.</p>
                 </div>
             </div>
-
             <div class="modal-action-bottom-footer" style="display: flex; gap: 10px; margin-top: 15px;">
                 <button class="add-to-cart-footer-btn" id="modal-cart-trigger" style="flex: 1; padding: 12px; border: 1px solid #ddd; background: white; border-radius: 8px; cursor: pointer; font-weight: bold;">Add to cart</button>
                 <button class="buy-now-footer-btn" id="modal-call-trigger" style="flex: 1; padding: 12px; background: #ff9f43; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">Buy at ₹00</button>
@@ -242,18 +268,23 @@
         .brand-card-node { text-align: center; cursor: pointer; padding: 8px; border-radius: 50%; min-width: 60px; }
         .brand-card-node.active-brand { background: #e0f2fe; border: 2px solid #3b82f6; }
         .brand-img-shell { font-size: 32px; }
-        .super-viewport-panel { width: 100%; transition: opacity 0.2s ease; }
+        .super-viewport-panel { width: 100%; }
     </style>
-
     <script>
+        // 1. Navigation Panel switch router tabs system
         function switchFooterTab(elementRef, targetViewId) {
             document.querySelectorAll('.bottom-tab-node').forEach(node => node.classList.remove('active-tab'));
             if(elementRef) elementRef.classList.add('active-tab');
             document.querySelectorAll('.super-viewport-panel').forEach(panel => panel.style.display = 'none');
 
-            if(targetViewId === 'marketplace') { document.getElementById('hub-view-marketplace').style.display = 'block'; }
-            else if(targetViewId === 'play') { document.getElementById('hub-view-play').style.display = 'block'; startSnakeGame(); }
-            else if(targetViewId === 'account') { document.getElementById('hub-view-account').style.display = 'block'; }
+            if(targetViewId === 'marketplace') { 
+                document.getElementById('hub-view-marketplace').style.display = 'block'; 
+            } else if(targetViewId === 'play') { 
+                document.getElementById('hub-view-play').style.display = 'block';
+                terminateGameSession(); // Opens the apps dashboard selection list view first
+            } else if(targetViewId === 'account') { 
+                document.getElementById('hub-view-account').style.display = 'block'; 
+            }
         }
 
         function toggleCategoriesPanel() {
@@ -263,78 +294,32 @@
             else { panel.style.left = '0px'; overlay.style.display = 'block'; }
         }
 
-        function switchMainHubMode(modeType, elementRef) {
-            document.querySelectorAll('.switch-app-tab').forEach(tab => tab.classList.remove('active'));
-            if(elementRef) elementRef.classList.add('active');
-            document.querySelectorAll('.super-viewport-panel').forEach(panel => panel.style.display = 'none');
-
-            if(modeType === 'shopper') { document.getElementById('hub-view-marketplace').style.display = 'block'; }
-            else if(modeType === 'flights') { document.getElementById('hub-view-flights').style.display = 'block'; }
-            else if(modeType === 'express') { document.getElementById('hub-view-express').style.display = 'block'; }
-        }
-
-        // DYNAMIC HIGH-TEXTURE SNAKE SYSTEM 
-        let snakeGridSize = 20, snakeX = 60, snakeY = 60, dx = 20, dy = 0;
-        let snakeItems = [{x: 60, y: 60}], snakeFood = {x: 180, y: 180}, arcadeTimer = null;
-
-        function startSnakeGame() {
-            const canv = document.getElementById('arcade-snake-canvas');
-            if(!canv) return;
-            const context = canv.getContext('2d');
-            snakeX = 60; snakeY = 60; dx = 20; dy = 0;
-            snakeItems = [{x: 60, y: 60}, {x: 40, y: 60}];
-            snakeFood = { x: Math.floor(Math.random() * 17) * 20, y: Math.floor(Math.random() * 17) * 20 };
+        // 2. Arcade Selection Core Menu & Session Drivers matrix hooks
+        let activeGameToken = null;
+        function initiateArcadeGame(gameType) {
+            activeGameToken = gameType;
+            document.getElementById('arcade-apps-dashboard').style.display = 'none';
+            document.getElementById('arcade-game-play-arena').style.display = 'block';
             
-            if(arcadeTimer) clearInterval(arcadeTimer);
-            arcadeTimer = setInterval(() => {
-                snakeX += dx; snakeY += dy;
-                if(snakeX < 0) snakeX = 340; if(snakeX > 340) snakeX = 0;
-                if(snakeY < 0) snakeY = 340; if(snakeY > 340) snakeY = 0;
+            // Format labels dynamically based on token types
+            const titleRef = document.getElementById('active-game-title-header');
+            if(gameType === 'snake') titleRef.textContent = "🐍 Neon Snake Arcade";
+            else if(gameType === 'bird') titleRef.textContent = "🐤 Flappy Bird Retro";
+            else if(gameType === 'bricks') titleRef.textContent = "🧱 Brick Breaker System";
+            else if(gameType === 'ttt') titleRef.textContent = "❌ Tic-Tac-Toe AI Bot";
+            else if(gameType === 'racer') titleRef.textContent = "🏎️ Highway Speed Racer";
+            else if(gameType === 'target') titleRef.textContent = "🎯 Click Target Rush";
 
-                let headNode = {x: snakeX, y: snakeY};
-                snakeItems.unshift(headNode);
-                if(snakeX === snakeFood.x && snakeY === snakeFood.y) {
-                    snakeFood = { x: Math.floor(Math.random() * 17) * 20, y: Math.floor(Math.random() * 17) * 20 };
-                } else { snakeItems.pop(); }
-
-                context.clearRect(0, 0, 360, 360);
-                // Grid matrix
-                context.strokeStyle = "rgba(51, 65, 85, 0.2)";
-                for(let l = 0; l <= 360; l += 20) {
-                    context.beginPath(); context.moveTo(l, 0); context.lineTo(l, 360); context.stroke();
-                    context.beginPath(); context.moveTo(0, l); context.lineTo(360, l); context.stroke();
-                }
-                // 3D Apple
-                context.save(); context.shadowBlur = 15; context.shadowColor = "#ef4444";
-                let foodGrad = context.createRadialGradient(snakeFood.x + 6, snakeFood.y + 6, 2, snakeFood.x + 10, snakeFood.y + 10, 10);
-                foodGrad.addColorStop(0, "#ff7675"); foodGrad.addColorStop(1, "#630202");
-                context.fillStyle = foodGrad; context.beginPath(); context.arc(snakeFood.x + 10, snakeFood.y + 10, 9, 0, 2*Math.PI); context.fill();
-                context.strokeStyle = "#2ecc71"; context.lineWidth = 2; context.beginPath(); context.moveTo(snakeFood.x + 10, snakeFood.y + 2); context.quadraticCurveTo(snakeFood.x + 14, snakeFood.y - 4, snakeFood.x + 16, snakeFood.y - 3); context.stroke();
-                context.restore();
-
-                // Shiny Snake
-                snakeItems.forEach((part, index) => {
-                    context.save(); context.shadowBlur = index === 0 ? 12 : 6; context.shadowColor = "#10b981";
-                    let snakeGrad = context.createRadialGradient(part.x + 8, part.y + 8, 2, part.x + 10, part.y + 10, 12);
-                    if(index === 0) {
-                        snakeGrad.addColorStop(0, "#34d399"); snakeGrad.addColorStop(1, "#047857");
-                        context.fillStyle = snakeGrad; context.beginPath(); context.roundRect(part.x, part.y, 19, 19, 6); context.fill();
-                        context.shadowBlur = 0; context.fillStyle = "white"; context.beginPath();
-                        context.arc(part.x + 5, part.y + 5, 2.5, 0, 2*Math.PI); context.arc(part.x + 14, part.y + 5, 2.5, 0, 2*Math.PI); context.fill();
-                    } else {
-                        snakeGrad.addColorStop(0, "#059669"); snakeGrad.addColorStop(1, "#064e3b");
-                        context.fillStyle = snakeGrad; context.beginPath(); context.roundRect(part.x + 1, part.y + 1, 17, 17, 4); context.fill();
-                    }
-                    context.restore();
-                });
-            }, 140);
+            if (typeof triggerSelectedArcadeEngine === "function") {
+                triggerSelectedArcadeEngine(gameType);
+            }
         }
 
-        function changeSnakeDir(dir) {
-            if(dir === 'UP' && dy === 0) { dx = 0; dy = -20; }
-            if(dir === 'DOWN' && dy === 0) { dx = 0; dy = 20; }
-            if(dir === 'LEFT' && dx === 0) { dx = -20; dy = 0; }
-            if(dir === 'RIGHT' && dx === 0) { dx = 20; dy = 0; }
+        function terminateGameSession() {
+            activeGameToken = null;
+            if (typeof resetAllArcadeLoops === "function") resetAllArcadeLoops();
+            document.getElementById('arcade-game-play-arena').style.display = 'none';
+            document.getElementById('arcade-apps-dashboard').style.display = 'block';
         }
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -344,6 +329,7 @@
             if(userPhone) document.getElementById("profile-render-phone").textContent = "📞 " + userPhone;
         });
     </script>
+
     <script src="nature.js"></script>
     <script src="script.js"></script>
 </body>
